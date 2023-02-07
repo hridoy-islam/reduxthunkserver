@@ -9,8 +9,8 @@ const cors = require("cors");
 app.use(cors());
 app.use(express.json());
 
-// const uri = process.env.MONGO_URL;
-const uri = `mongodb://localhost:27017/`
+const uri = process.env.MONGO_URL;
+//const uri = `mongodb://localhost:27017/`
 const client = new MongoClient(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -56,7 +56,7 @@ const run = async () => {
     app.patch('/post/:id', async(req, res)=> {
       const id = req.params.id;
       const data = req.body
-      const result = await postCollection.fineOne({_id: ObjectId(id)});
+      const result = await postCollection.findOne({_id: ObjectId(id)});
       res.send(result);
 
     })
